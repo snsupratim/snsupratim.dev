@@ -18,47 +18,40 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { FileText, Download, GraduationCap } from "lucide-react"; // Added GraduationCap for the page title
-import Image from "next/image";
+import { FileText, Download, GraduationCap } from "lucide-react";
 
-// NOTE: Ensure these image and file paths are correct in your project's public directory!
 const certifications = [
   {
     id: 1,
-    title: "Deep Learning Specialization",
-    platform: "Coursera",
-    year: "2023",
-    file: "/certificates/Vaidsys.pdf",
-    image: "/profile.png", // Image for preview
+    title: "Python for Data Science",
+    platform: "Udemy (Sara Academy)",
+    year: "2024",
+    certificate: "/certificates/python_data_science_certificate.pdf",
   },
   {
     id: 2,
-    title: "Full Stack Web Development",
-    platform: "Udemy",
-    year: "2022",
-    file: "/certificates/Vaidsys.pdf",
-    image: "/profile.png",
+    title: "RAG with Embeddings & VectorDB",
+    platform: "Coursera",
+    year: "2025",
+    certificate: "certificates/Coursera_RAG.pdf",
   },
   {
     id: 3,
-    title: "Generative AI Bootcamp",
-    platform: "AI Academy",
-    year: "2024",
-    file: "/certificates/Vaidsys.pdf",
-    image: "/profile.png",
+    title: "Programming using Java",
+    platform: "Infosys Springboard",
+    year: "2025",
+    certificate: "/certificates/java.pdf",
   },
-  // Adding a fourth item for a better grid look
   {
     id: 4,
-    title: "Data Structures & Algorithms",
-    platform: "Codecademy",
-    year: "2022",
-    file: "/certificates/Vaidsys.pdf",
-    image: "/profile.png",
+    title: "Database Management Systems",
+    platform: "Infosys Springboard",
+    year: "2025",
+    certificate: "/certificates/dbms.pdf",
   },
 ];
 
-// --- Skeleton Component for Loading State ---
+// Skeleton during loading
 const CertificationSkeleton = () => (
   <Card className="flex flex-col p-4 space-y-3 h-64 border-2">
     <Skeleton className="h-10 w-3/4 rounded-md" />
@@ -74,15 +67,15 @@ const CertificationSkeleton = () => (
 export default function CoursesPage() {
   const [loading, setLoading] = useState(true);
 
-  // Simulate a network fetch delay
+  // Simulate a delay
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1500);
+    const timer = setTimeout(() => setLoading(false), 1200);
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <div className="p-6 lg:p-10 flex flex-col gap-10">
-      {/* --- Page Title --- */}
+      {/* Page Title */}
       <div className="flex items-center gap-3">
         <GraduationCap className="h-8 w-8 text-primary" />
         <h1 className="text-4xl font-extrabold tracking-tight text-foreground">
@@ -90,16 +83,14 @@ export default function CoursesPage() {
         </h1>
       </div>
 
-      <ScrollArea className="w-full ">
-        {/* --- Certification Grid --- */}
+      {/* Certification Grid */}
+      <ScrollArea className="w-full">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-4">
-          {/* --- Loading State: Skeletons --- */}
           {loading
             ? Array.from({ length: 4 }).map((_, idx) => (
                 <CertificationSkeleton key={idx} />
               ))
-            : /* --- Loaded State: Certifications --- */
-              certifications.map((cert) => (
+            : certifications.map((cert) => (
                 <Card
                   key={cert.id}
                   className="group flex flex-col hover:border-primary transition-all duration-300 transform hover:-translate-y-1 shadow-sm hover:shadow-lg border-2"
@@ -118,7 +109,7 @@ export default function CoursesPage() {
                       Completed: {cert.year}
                     </p>
 
-                    {/* Dialog Trigger */}
+                    {/* Dialog with PDF Preview */}
                     <Dialog>
                       <DialogTrigger asChild>
                         <Button
@@ -126,38 +117,37 @@ export default function CoursesPage() {
                           size="sm"
                           className="w-full flex items-center justify-center gap-2 group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
                         >
-                          <FileText size={16} /> View Details
+                          <FileText size={16} /> View Certificate
                         </Button>
                       </DialogTrigger>
 
-                      {/* Dialog Content (Modal) */}
-                      <DialogContent className="max-w-xl sm:max-w-2xl lg:max-w-3xl w-full">
-                        <DialogHeader>
+                      <DialogContent className="max-w-4xl w-full h-[100vh] p-0 overflow-hidden flex flex-col">
+                        <DialogHeader className="p-4 border-b">
                           <DialogTitle>{cert.title}</DialogTitle>
                         </DialogHeader>
 
-                        <div className="mt-4 flex flex-col gap-4">
-                          {/* Download Button */}
-                          <a href={cert.file} download className="w-full">
-                            <Button className="w-full flex items-center justify-center gap-2">
-                              <Download size={16} /> Download Certificate PDF
-                            </Button>
-                          </a>
+                        {/* PDF Preview */}
+                        <div className="flex-1 overflow-hidden">
+                          <iframe
+                            src={cert.certificate}
+                            width="100%"
+                            height="100%"
+                            className="rounded-none"
+                          ></iframe>
+                        </div>
 
-                          {/* Image Preview Section */}
-                          <div className="text-center text-sm text-muted-foreground pt-2">
-                            Certificate Preview
-                          </div>
-                          <div className="relative w-full aspect-video border rounded-lg overflow-hidden">
-                            <Image
-                              src={cert.image}
-                              alt={`Certificate for ${cert.title}`}
-                              fill
-                              style={{ objectFit: "contain" }}
-                              className="p-2"
-                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            />
-                          </div>
+                        {/* Download Button */}
+                        <div className="p-4 border-t flex justify-end bg-muted/20">
+                          <Button
+                            asChild
+                            variant="default"
+                            className="flex items-center gap-2"
+                          >
+                            <a href={cert.certificate} download>
+                              <Download className="h-4 w-4" />
+                              Download Certificate
+                            </a>
+                          </Button>
                         </div>
                       </DialogContent>
                     </Dialog>

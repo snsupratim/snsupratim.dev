@@ -29,7 +29,7 @@ const Navbar = () => {
       {/* RIGHT SECTION */}
       <div className="flex items-center gap-4 ml-auto">
         {/* DASHBOARD */}
-        <Link href="/dashboard">Dashboard</Link>
+        <Link href="/resumes">Resume</Link>
 
         {/* DARK MODE AND LIGHT MODE */}
         <DropdownMenu>

@@ -9,65 +9,55 @@ import Image from "next/image";
 const experiences = [
   {
     id: 1,
-    title: "AI Intern",
-    company: "Vaidsys",
-    duration: "June 2023 - August 2023",
+    title: "Frontend Developer Intern",
+    company: "TekAnthem",
+    duration: "September 2025 - Present",
     description:
-      "Worked on building AI-based healthcare models for early diagnosis and clinical data processing using Python and TensorFlow. Contributed to optimizing model performance and automating preprocessing pipelines.",
+      "Contributing to frontend development of a payroll management platform using Next.js, TypeScript, TailwindCSS, React-Hook-Form, and Zod validation. Collaborating with design and backend teams to build responsive and accessible user interfaces.",
   },
   {
     id: 2,
-    title: "Data Science Intern",
-    company: "Exposys Data Labs",
-    duration: "May 2023 - June 2023",
+    title: "Machine Learning Intern",
+    company: "Uotricks",
+    duration: "March 2024 - May 2024",
     description:
-      "Developed data analysis workflows using Pandas and Matplotlib, worked with large datasets for trend prediction, and built dashboards for insights presentation.",
+      "Developed a Loan Approval Prediction System using various ML algorithms including Logistic Regression and Random Forest. Integrated model with a Streamlit-based interface for deployment and user testing.",
   },
   {
     id: 3,
-    title: "SDE Team Co-Lead",
-    company: "BlueStock Fintech",
-    duration: "July 2024 - September 2024",
-    description:
-      "Led a small engineering team to build full-stack web features using the MERN stack, integrated REST APIs, and improved deployment workflows using Docker and GitHub Actions.",
-  },
-  {
-    id: 4,
     title: "AI Intern",
     company: "Vaidsys",
     duration: "June 2023 - August 2023",
     description:
-      "Worked on building AI-based healthcare models for early diagnosis and clinical data processing using Python and TensorFlow. Contributed to optimizing model performance and automating preprocessing pipelines.",
+      "Worked on AI-driven solutions for NLP and image-based tasks. Fine-tuned transformer models for healthcare domain data and contributed to image preprocessing pipelines for diagnosis assistance.",
   },
   {
-    id: 5,
+    id: 4,
     title: "Data Science Intern",
     company: "Exposys Data Labs",
     duration: "May 2023 - June 2023",
     description:
-      "Developed data analysis workflows using Pandas and Matplotlib, worked with large datasets for trend prediction, and built dashboards for insights presentation.",
+      "Performed exploratory data analysis and built predictive ML models using Python, Pandas, and Scikit-learn. Automated data-cleaning pipelines and visualized insights using Matplotlib and Seaborn.",
   },
   {
-    id: 6,
+    id: 5,
     title: "SDE Team Co-Lead",
     company: "BlueStock Fintech",
-    duration: "July 2024 - September 2024",
+    duration: "June 2024 - September 2024",
     description:
-      "Led a small engineering team to build full-stack web features using the MERN stack, integrated REST APIs, and improved deployment workflows using Docker and GitHub Actions.",
+      "Led a small development team to design and deploy internal tools for financial analytics. Enhanced backend APIs, containerized services using Docker, and mentored junior developers in Git workflows and full-stack development.",
   },
 ];
 
 export default function ExperiencePage() {
   const [loading, setLoading] = useState(true);
 
-  // Simulate loading state for skeleton
   useEffect(() => {
     const timeout = setTimeout(() => setLoading(false), 1500);
     return () => clearTimeout(timeout);
   }, []);
 
   return (
-    // <div className="p-6 lg:p-10 flex flex-col lg:flex-row items-start gap-10">
     <div className="p-6 lg:p-10 flex flex-col gap-10">
       {/* --- Page Title --- */}
       <div className="flex items-center gap-3">
@@ -76,7 +66,8 @@ export default function ExperiencePage() {
           My Experience
         </h1>
       </div>
-      {/* Left Side - Timeline */}
+
+      {/* --- Timeline Section --- */}
       <div className="flex-1 w-full">
         <div className="relative border-l border-gray-300 dark:border-gray-700 ml-4">
           {experiences.map((exp) => (
@@ -110,20 +101,20 @@ export default function ExperiencePage() {
                       </p>
                     </div>
 
-                    {/* Right-side Image (responsive avatar on mobile) */}
-                    <div className="w-full lg:w-auto flex justify-center lg:justify-end">
+                    {/* Optional image or logo */}
+                    {/* <div className="w-full lg:w-auto flex justify-center lg:justify-end">
                       {loading ? (
                         <Skeleton className="w-24 h-24 lg:w-40 lg:h-40 rounded-full lg:rounded-xl" />
                       ) : (
                         <Image
-                          src="/profile.png" // 🔁 replace with your actual image path
+                          src="/profile.png"
                           alt={`${exp.company} logo`}
                           width={160}
                           height={160}
                           className="rounded-full lg:rounded-xl object-cover shadow-md transition-transform duration-300 hover:scale-105"
                         />
                       )}
-                    </div>
+                    </div> */}
                   </CardContent>
                 </Card>
               )}
@@ -131,21 +122,6 @@ export default function ExperiencePage() {
           ))}
         </div>
       </div>
-
-      {/* Right Side - Image Section */}
-      {/* <div className="w-full lg:w-1/3 flex justify-center">
-        {loading ? (
-          <Skeleton className="w-80 h-80 rounded-xl" />
-        ) : (
-          <Image
-            src="/profile.png" // 🔁 replace with your actual image path
-            alt="Work Experience"
-            width={320}
-            height={320}
-            className="rounded-xl object-cover shadow-md"
-          />
-        )}
-      </div> */}
     </div>
   );
 }

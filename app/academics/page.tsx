@@ -3,7 +3,9 @@
 import { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
-import { GraduationCap } from "lucide-react";
+import { GraduationCap, School, Cpu } from "lucide-react";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 export default function AcademicsPage() {
   const [loading, setLoading] = useState(true);
@@ -14,53 +16,67 @@ export default function AcademicsPage() {
   }, []);
 
   return (
-    <div className="p-6 lg:p-10 flex flex-col gap-10 ">
+    <div className="p-6 lg:p-10 flex flex-col gap-10 min-h-screen">
       {/* --- Page Title --- */}
-      <div className="flex items-center gap-3">
-        <GraduationCap className="h-8 w-8 text-primary" />
+      <div className="flex items-center gap-3 justify-center">
+        <GraduationCap className="h-10 w-10 text-primary" />
         <h1 className="text-4xl font-extrabold tracking-tight text-foreground">
-          My Projects
+          Academic Journey
         </h1>
       </div>
-      {/* <h1 className="text-3xl font-bold text-primary mb-6">Academics</h1> */}
 
+      {/* --- Tabs --- */}
       <div className="flex items-center justify-center">
-        {" "}
-        <Tabs defaultValue="school" className="w-full max-w-3xl items-center">
-          <TabsList className="justify-center mb-6">
+        <Tabs defaultValue="school" className="w-full max-w-4xl">
+          <TabsList className="justify-center mb-8">
             <TabsTrigger value="school">School</TabsTrigger>
             <TabsTrigger value="btech">B.Tech</TabsTrigger>
-            <TabsTrigger value="mtech">M.Tech</TabsTrigger>
           </TabsList>
 
           {/* ---------------- School Tab ---------------- */}
           <TabsContent value="school">
             {loading ? (
               <div className="space-y-4">
-                <Skeleton className="h-4 w-3/4" />
-                <Skeleton className="h-4 w-2/3" />
-                <Skeleton className="h-4 w-4/5" />
+                <Skeleton className="h-6 w-2/3 mx-auto" />
+                <Skeleton className="h-4 w-3/4 mx-auto" />
+                <Skeleton className="h-4 w-2/3 mx-auto" />
+                <Skeleton className="h-4 w-5/6 mx-auto" />
               </div>
             ) : (
-              <div className="space-y-4">
-                <p>
-                  Completed schooling from{" "}
-                  <span className="font-semibold">XYZ School</span>, Classes
-                  1–12.
-                </p>
-                <p>
-                  <span className="font-semibold">Class 10:</span> 94% (Board
-                  Exam)
-                </p>
-                <p>
-                  <span className="font-semibold">Class 12:</span> 90% (PCM +
-                  Computer Science)
-                </p>
-                <p>
-                  Developed strong foundation in mathematics, logical reasoning,
-                  and problem-solving.
-                </p>
-              </div>
+              <Card className="shadow-lg border-border/60">
+                <CardHeader className="flex flex-row items-center gap-3">
+                  <School className="h-8 w-8 text-primary" />
+                  <div>
+                    <CardTitle className="text-xl font-bold">
+                      Howrah Vivekananda Institution
+                    </CardTitle>
+                    <p className="text-sm text-muted-foreground">
+                      Classes 1–12 | West Bengal State Board (2009 – 2022)
+                    </p>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-4 text-base leading-relaxed">
+                  <Separator />
+                  <p>
+                    Completed schooling with excellence in academics and active
+                    participation in extracurricular activities.
+                  </p>
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>
+                      <span className="font-semibold">Class 10:</span> 90.6%
+                      (Board Examination)
+                    </li>
+                    <li>
+                      <span className="font-semibold">Class 12:</span> 86.6%
+                      (PCM + Computer Science)
+                    </li>
+                    <li>
+                      Built strong foundations in mathematics, logic, and
+                      problem-solving.
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
             )}
           </TabsContent>
 
@@ -68,65 +84,53 @@ export default function AcademicsPage() {
           <TabsContent value="btech">
             {loading ? (
               <div className="space-y-4">
-                <Skeleton className="h-4 w-3/4" />
-                <Skeleton className="h-4 w-2/3" />
-                <Skeleton className="h-4 w-4/5" />
+                <Skeleton className="h-6 w-2/3 mx-auto" />
+                <Skeleton className="h-4 w-3/4 mx-auto" />
+                <Skeleton className="h-4 w-2/3 mx-auto" />
+                <Skeleton className="h-4 w-5/6 mx-auto" />
               </div>
             ) : (
-              <div className="space-y-4">
-                <p>
-                  Pursuing{" "}
-                  <span className="font-semibold">
-                    B.Tech in Artificial Intelligence and Machine Learning
-                  </span>{" "}
-                  at{" "}
-                  <span className="font-semibold">
-                    MCKV Institute of Engineering
-                  </span>
-                  .
-                </p>
-                <p>
-                  <span className="font-semibold">Duration:</span> 2021 – 2025
-                </p>
-                <p>
-                  <span className="font-semibold">Current CGPA:</span> 9.3
-                </p>
-                <p>
-                  Worked on multiple AI and web projects, participated in
-                  hackathons hosted by IIT BHU and IIT KGP, and completed
-                  internships at top companies.
-                </p>
-              </div>
-            )}
-          </TabsContent>
-
-          {/* ---------------- M.Tech Tab ---------------- */}
-          <TabsContent value="mtech">
-            {loading ? (
-              <div className="space-y-4">
-                <Skeleton className="h-4 w-3/4" />
-                <Skeleton className="h-4 w-2/3" />
-                <Skeleton className="h-4 w-4/5" />
-              </div>
-            ) : (
-              <div className="space-y-4">
-                {/* <p>
-                <span className="font-semibold">
-                  M.Tech in Artificial Intelligence
-                </span>{" "}
-                at <span className="font-semibold">ABC University</span>{" "}
-                (planned/ongoing).
-              </p>
-              <p>
-                <span className="font-semibold">Focus Areas:</span> Deep
-                Learning, Generative AI, and Multi-Agent Systems.
-              </p>
-              <p>
-                Working on research-oriented projects and advanced AI
-                applications.
-              </p> */}
-                <p>In Future</p>
-              </div>
+              <Card className="shadow-lg border-border/60">
+                <CardHeader className="flex flex-row items-center gap-3">
+                  <Cpu className="h-8 w-8 text-primary" />
+                  <div>
+                    <CardTitle className="text-xl font-bold">
+                      B.Tech in Compuer Science with Artificial Intelligence &
+                      Machine Learning
+                    </CardTitle>
+                    <p className="text-sm text-muted-foreground">
+                      MCKV Institute of Engineering (2022 – 2026*)
+                    </p>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-4 text-base leading-relaxed">
+                  <Separator />
+                  <p>
+                    Currently pursuing a specialized degree focusing on Machine
+                    Learning, Deep Learning, and Generative AI technologies.
+                  </p>
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>
+                      <span className="font-semibold">Current CGPA:</span> 9.33
+                    </li>
+                    <li>
+                      <span className="font-semibold">Key Projects:</span>{" "}
+                      RAG-based Medical Chatbot, Rose Leaf Disease Detection
+                      using CNNs, and Agentic AI Systems.
+                    </li>
+                    <li>
+                      <span className="font-semibold">Achievements:</span>{" "}
+                      Participated in IIT BHU & IIT KGP Hackathons, led AI-based
+                      team projects, and contributed to open-source communities.
+                    </li>
+                    <li>
+                      <span className="font-semibold">Internships:</span> AI
+                      Intern at Vaidsys, Data Science Intern at Exposys, and SDE
+                      Team Co-Lead at BlueStock.
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
             )}
           </TabsContent>
         </Tabs>
